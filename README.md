@@ -36,12 +36,27 @@ An interactive web-based tool where high school students can have conversations 
 
 ## Getting Started
 
-### Prerequisites
+### For Classroom Use (Easiest - Recommended)
+
+**Simply open `hidden-histories-oracle.html` in any web browser.**
+
+That's it! No installation, no command line, no dependencies. Just:
+1. Download or copy `hidden-histories-oracle.html`
+2. Double-click to open in your browser
+3. Share with students - they can open it on any device
+
+This single file contains everything needed and works offline.
+
+### For Developers (Vite + React)
+
+If you want to modify or develop the application further:
+
+#### Prerequisites
 
 - Node.js (v18 or higher)
 - npm
 
-### Installation
+#### Installation
 
 ```bash
 # Install dependencies

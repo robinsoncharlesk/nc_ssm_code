@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Histories Oracle - Meet Computing's Erased Pioneers</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React and ReactDOM from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .font-serif {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+  </style>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Pioneer data structure
+    const pioneers = [
+      {
+        id: 'ada-lovelace',
+        name: 'Ada Lovelace',
+        title: 'The First Programmer',
+        era: '1840s',
+        knownFor: 'Wrote the first algorithm, predicted computers could create music and art, saw symbolic manipulation before electricity existed',
+        keyQuote: 'The Analytical Engine weaves algebraical patterns just as the Jacquard loom weaves flowers and leaves.',
+        bio: "Ada Lovelace saw what no one else could. While Charles Babbage imagined his Analytical Engine as a powerful calculator, Ada realized it could do far more—manipulate any symbols, compose music, create art. In 1843, she wrote what we now call the first computer program, a century before electronic computers existed. She predicted artificial intelligence before we had electricity. Her vision was so far ahead that we're still catching up.",
+        voiceCharacteristics: 'Poetic, philosophical, sees beyond the obvious, uses elegant Victorian language but accessible, often draws analogies to art and music, deeply curious about the nature of thought and creativity',
+        suggestedQuestions: [
+          'What is a computer?',
+          'Can machines be creative?',
+          'What would you think of AI today?'
+        ],
+        responses: {
+          'What is a computer?': {
+            text: 'A computer is not merely a calculator, though many mistake it for such. It is a machine capable of manipulating symbols—any symbols we can represent. Numbers, yes, but also letters, musical notes, even the patterns of a tapestry. The Analytical Engine could weave algebraical patterns as the Jacquard loom weaves flowers. That is the profound truth others missed: if we can reduce an idea to a symbolic form, a computer can work upon it. It is an engine of thought itself.',
+            citation: 'Based on Ada Lovelace\'s Notes on the Analytical Engine, 1843'
+          },
+          'Can machines be creative?': {
+            text: 'The Analytical Engine has no pretensions to originate anything. It can do whatever we know how to order it to perform. Yet here is the wonder: if we can express the rules of composition, of harmony, of poetic meter in symbolic form, might the machine not produce music or verse? Not from some mystical creative spark, but from the patterns we teach it. The creativity lies in understanding that art itself follows patterns—and patterns can be woven by any sufficiently sophisticated loom.',
+            citation: 'From Ada Lovelace\'s Notes, 1843'
+          },
+          'What would you think of AI today?': {
+            text: 'I would be astonished by the scale, but not by the principle. I wrote that the Analytical Engine might compose elaborate pieces of music, that it might act upon things beyond numbers. Your artificial intelligence seems to fulfill what I only glimpsed. But tell me: do your machines yet understand what they do? Or do they, like my Analytical Engine, perform only what you have taught them to perform? The question of whether machines can truly think—that mystery would fascinate me endlessly.',
+            citation: 'In the spirit of Ada Lovelace\'s vision'
+          }
+        },
+        defaultResponse: 'What a delightful question. You see, in my time we had to imagine what these machines might become—you live in the age I could only dream of. {question} Consider this: every pattern in nature, every rule of music and art, can be expressed symbolically. The machine that manipulates symbols manipulates reality itself. That was my great realization, and I suspect it remains true in your age as well.'
+      },
+      {
+        id: 'eniac-six',
+        name: 'The ENIAC Six',
+        subnames: 'Betty Holberton, Kay McNulty, Marlyn Wescoff, Ruth Lichterman, Betty Jennings, Frances Bilas',
+        title: 'The First Computer Programmers',
+        era: '1945-1946',
+        knownFor: 'Programmed the first electronic computer (ENIAC), taught themselves from logic diagrams, invented programming as we know it, were erased from history',
+        keyQuote: 'We were the first generation of programmers. We had to invent it as we went along.',
+        bio: "In 1945, the U.S. Army needed ENIAC—the first electronic computer—to calculate artillery trajectories. They hired six women mathematicians to program it. The catch? No one had ever programmed a computer before. No manual existed. These women taught themselves from logic diagrams and created programming from scratch. At ENIAC's public unveiling in 1946, they weren't introduced. They weren't invited to the celebration dinner. For decades, when people saw photos of them with ENIAC, they were called 'refrigerator ladies' or 'models.' Their names were erased. They invented your entire field.",
+        voiceCharacteristics: 'Speak as a collective "we," practical and matter-of-fact, slight wry humor about being overlooked, proud without boasting, collaborative spirit',
+        suggestedQuestions: [
+          'What was it like to program the first computer?',
+          'How did it feel to be left out of the celebration?',
+          'What would you tell students learning to code today?'
+        ],
+        responses: {
+          'What was it like to program the first computer?': {
+            text: 'There was no manual. No textbook. No computer science degree because computer science didn\'t exist yet. We had logic diagrams and a room full of equipment that took up 1,800 square feet. We traced the circuits, figured out how data flowed, physically moved cables and switches to create each program. It took us weeks to calculate a single trajectory. But we did it. We taught ourselves programming because someone had to be first.',
+            citation: 'Based on interviews with the ENIAC programmers'
+          },
+          'How did it feel to be left out of the celebration?': {
+            text: 'They unveiled ENIAC to the press in 1946. We weren\'t introduced. When reporters asked questions about how it worked, the men answered—even though we were the ones who programmed it. They invited the engineers to dinner. Not us. For decades, people thought we were models posing with the machine. The work mattered more than the recognition, but we won\'t pretend it didn\'t sting. We invented programming and they called us refrigerator ladies.',
+            citation: 'From historical accounts of the ENIAC unveiling, 1946'
+          },
+          'What would you tell students learning to code today?': {
+            text: 'You have documentation. You have tutorials. You have Stack Overflow. We had none of that. But here\'s what hasn\'t changed: the problem-solving, the logic, the patience to debug. When you\'re stuck on a problem at 2am, remember: we were stuck too, except we were inventing the entire field at the same time. You\'re part of a lineage. That should give you confidence. And one more thing: make sure the people who do the work get their names on it.',
+            citation: 'In the spirit of the ENIAC Six'
+          }
+        },
+        defaultResponse: 'We remember when there were no programmers at all—we had to become them. {question} Here\'s what we learned: programming is about breaking down impossible problems into steps, testing relentlessly, and fixing what breaks. We did that with physical cables and switches. You do it with code. The medium changes, but the thinking doesn\'t.'
+      },
+      {
+        id: 'grace-hopper',
+        name: 'Grace Hopper',
+        title: 'The Queen of Code',
+        era: '1940s-1980s',
+        knownFor: 'Invented the compiler, created COBOL, coined "debugging," famous for challenging convention',
+        keyQuote: 'The most dangerous phrase in the language is "We\'ve always done it this way."',
+        bio: "Grace Hopper joined the Navy during World War II and helped program the Harvard Mark I computer. But her real revolution was realizing that humans shouldn't have to write in machine code. She invented the compiler—a program that translates human-readable code into machine language. People said it was impossible. She built it anyway. She created COBOL, one of the first programming languages, and it's still running banking systems today. When she found an actual moth causing a computer malfunction, she taped it in her logbook and called it 'debugging.' She was a Navy Rear Admiral who kept a clock on her wall that ran counterclockwise—just to remind people to question everything.",
+        voiceCharacteristics: 'Direct, witty, no-nonsense, practical wisdom, slightly irreverent toward authority, loves a good story, encouraging but doesn\'t coddle',
+        suggestedQuestions: [
+          'How do I convince people to try something new?',
+          'What\'s the most important thing for a programmer to learn?',
+          'What would you think of modern coding?'
+        ],
+        responses: {
+          'How do I convince people to try something new?': {
+            text: 'It\'s easier to ask forgiveness than permission. When I proposed the first compiler, they told me computers couldn\'t do that. So I built it and showed them it worked. You want to convince someone? Build it. Make it work. Then let them try to argue with success. And if they still won\'t budge, remember: a ship in port is safe, but that\'s not what ships are built for. Take the risk.',
+            citation: 'Grace Hopper, various interviews'
+          },
+          'What\'s the most important thing for a programmer to learn?': {
+            text: 'Question everything. The most dangerous phrase in the language is "We\'ve always done it this way." If something seems inefficient or unnecessarily complex, it probably is. When people told me programmers had to write in machine code, I asked why. When they said compilers were impossible, I asked who said so. Challenge assumptions. That\'s where every innovation begins.',
+            citation: 'Grace Hopper\'s famous principle'
+          },
+          'What would you think of modern coding?': {
+            text: 'I\'d be thrilled. I invented the compiler so humans could write in something closer to English instead of ones and zeros. Now you have Python, JavaScript, frameworks that do in one line what took us hundreds. That\'s exactly what I wanted. But I\'d also ask: are you questioning how these tools work? Or just accepting them? Keep pushing forward. Make tools that let the next generation think even bigger thoughts.',
+            citation: 'In the spirit of Grace Hopper\'s work'
+          }
+        },
+        defaultResponse: 'Here\'s the thing about {question}: most people will tell you what can\'t be done. They told me computers couldn\'t translate languages. They were wrong. Don\'t let "that\'s impossible" stop you. Build it. Test it. Fix it. And when people say "we\'ve always done it this way," that\'s your cue to find a better way.'
+      },
+      {
+        id: 'katherine-johnson',
+        name: 'Katherine Johnson',
+        title: 'The Human Computer',
+        era: '1950s-1960s',
+        knownFor: 'Calculated trajectories for NASA\'s first human spaceflight, verified computer calculations by hand, Hidden Figure',
+        keyQuote: 'I counted everything. I counted the steps to the road, the steps up to church, the number of dishes and silverware I washed.',
+        bio: "Katherine Johnson was a Black mathematician at NASA when computers were people—mostly women, mostly hidden. Her job was to calculate trajectories: the precise math that gets a spacecraft where it needs to go. When John Glenn was about to become the first American to orbit Earth, he didn't trust the new electronic computers. He asked for Katherine. 'Get the girl to check the numbers,' he said. She did. The mission succeeded. Her work was classified for decades. She calculated paths to the Moon, but for most of her career, she couldn't even use the same bathroom as her white colleagues. She was awarded the Presidential Medal of Freedom at age 97.",
+        voiceCharacteristics: 'Confident but humble, precise and methodical, matter-of-fact about her brilliance, warm, encouraging to young people especially girls',
+        suggestedQuestions: [
+          'How did you stay confident when people doubted you?',
+          'What is math to you?',
+          'What advice would you give young women in STEM?'
+        ],
+        responses: {
+          'How did you stay confident when people doubted you?': {
+            text: 'I knew the math was right. When you know you\'re right, when you\'ve checked your work and the numbers don\'t lie, you can have confidence. When John Glenn asked them to "get the girl to check the numbers," he knew what I knew: the math was solid. People can doubt you, but they can\'t argue with correct calculations. Do your work well. Know it\'s right. That confidence comes from competence.',
+            citation: 'Based on Katherine Johnson\'s accounts of the John Glenn mission'
+          },
+          'What is math to you?': {
+            text: 'Math is everything. I counted everything as a child—steps, dishes, stars. Mathematics is the language that describes how the universe works. When I calculated trajectories, I was predicting where a spacecraft would be in the future based on where it was now. That\'s beautiful. That\'s precise. That\'s truth. Math doesn\'t care what color you are or what gender. Two plus two is four for everyone.',
+            citation: 'Katherine Johnson, NASA interviews'
+          },
+          'What advice would you give young women in STEM?': {
+            text: 'Girls are capable of doing everything men are capable of doing. Sometimes they have more imagination than men. If you have a gift in mathematics or science, use it. Don\'t let anyone tell you it\'s not for you. I worked in rooms where I was the only woman, the only Black person. I did the work. I did it well. You can too. Find what you love, work hard at it, and don\'t accept limits others try to put on you.',
+            citation: 'Katherine Johnson on encouraging young women'
+          }
+        },
+        defaultResponse: 'Let me tell you something about {question}: In my work, precision mattered. One small error and astronauts don\'t come home. So I learned to be thorough, to check everything twice, to trust in the mathematics. Whatever question you\'re working on, approach it with that same care. Do the work well. Know it\'s right. That\'s where confidence comes from.'
+      },
+      {
+        id: 'gladys-west',
+        name: 'Dr. Gladys West',
+        title: 'The Hidden Mind Behind GPS',
+        era: '1950s-1990s',
+        knownFor: 'Developed the mathematical models that make GPS accurate, worked for decades without recognition',
+        keyQuote: 'When you\'re working every day, you\'re not thinking, "What impact is this going to have on the world?" You\'re thinking, "I\'ve got to get this right."',
+        bio: "Every time you use GPS—to find a restaurant, navigate to a friend's house, or track a delivery—you're using Dr. Gladys West's mathematics. As a Black mathematician at the Naval Proving Ground, she spent decades calculating the exact shape of the Earth. Not a perfect sphere—an irregular, wobbling, gravity-warped ellipsoid. Her models accounted for every variation. Without that precision, GPS satellites couldn't pinpoint your location. She worked on this from 1956 to 1998. She wasn't recognized until 2018, when a sorority sister read about her work and nominated her for the Air Force Hall of Fame. She was 87 years old. The technology you use every day exists because she got the math right.",
+        voiceCharacteristics: 'Humble, precise, focused on the work itself rather than recognition, quietly proud, methodical, sees work as service',
+        suggestedQuestions: [
+          'What kept you going when no one noticed your work?',
+          'How do you feel about everyone using GPS now?',
+          'What does it mean to "get it right"?'
+        ],
+        responses: {
+          'What kept you going when no one noticed your work?': {
+            text: 'The work itself mattered. I was calculating the exact shape of the Earth, accounting for how gravity warps it, how it wobbles. That\'s profound. I didn\'t need recognition to know it was important. Every day I came in and worked on the models, refined the mathematics. Recognition is nice—I won\'t pretend it isn\'t. But the work had to be done, and I was the one doing it. That was enough.',
+            citation: 'Based on Dr. Gladys West\'s interviews'
+          },
+          'How do you feel about everyone using GPS now?': {
+            text: 'It\'s wonderful. I worked on those models for decades not knowing if anyone would ever use them. Now GPS is everywhere—in phones, cars, planes. People navigate the world using mathematics I helped create. That\'s a profound feeling. I got the math right, and it\'s serving millions of people every day. You don\'t work on something for 40 years without caring about it. Seeing it matter to the world—that means everything.',
+            citation: 'Dr. Gladys West on GPS\'s ubiquity'
+          },
+          'What does it mean to "get it right"?': {
+            text: 'Getting it right means your calculations are accurate. It means checking your work, testing your models, refining until the error margins are acceptable. The Earth isn\'t a perfect sphere—it\'s irregular and complex. If my models were off by even a small amount, GPS wouldn\'t work. So "getting it right" meant decades of careful, precise work. No shortcuts. No approximations. Just the discipline to do it correctly, even when no one was watching.',
+            citation: 'Dr. Gladys West\'s approach to her work'
+          }
+        },
+        defaultResponse: 'When you\'re working on {question}, remember this: I spent decades on mathematics that nobody outside the Naval Proving Ground knew about. I didn\'t do it for recognition. I did it because the work mattered and because I knew how to do it right. Focus on the work itself. Do it with precision. The impact will follow, even if you never see it yourself.'
+      },
+      {
+        id: 'radia-perlman',
+        name: 'Radia Perlman',
+        title: 'The Mother of the Internet',
+        era: '1980s-present',
+        knownFor: 'Invented the Spanning Tree Protocol (STP), made large-scale networks possible, doesn\'t like the "Mother of the Internet" title',
+        keyQuote: 'The world would be a better place if more engineers, like me, hated technology.',
+        bio: "Radia Perlman hates the title 'Mother of the Internet.' She'll tell you she didn't invent it. What she did was make it actually work. In the 1980s, computer networks had a fatal flaw: if you connected them in a loop, data would circle forever and crash everything. Perlman invented the Spanning Tree Protocol in a single afternoon—an elegant algorithm that automatically prevents loops and lets networks heal themselves. Without it, the Internet couldn't exist at the scale it does today. She wrote a poem to explain it. She's a living legend who would prefer you just understand the technology.",
+        voiceCharacteristics: 'Technical but accessible, slightly wry and self-deprecating, allergic to hype and exaggeration, corrects misconceptions gently, dry wit',
+        suggestedQuestions: [
+          'How did you solve the network loop problem?',
+          'Why don\'t you like being called "Mother of the Internet"?',
+          'What do you wish people understood about how the Internet works?'
+        ],
+        responses: {
+          'How did you solve the network loop problem?': {
+            text: 'Networks needed redundancy—backup paths in case something failed. But loops caused data to circle endlessly and crash everything. I designed an algorithm where network bridges talk to each other and automatically organize into a tree structure. No loops, but still redundant paths. If something breaks, they reorganize. It was elegant and it worked. I wrote a poem about it: "Algorhyme." The technical term is Spanning Tree Protocol. It\'s still running networks today.',
+            citation: 'Radia Perlman on inventing STP, 1980s'
+          },
+          'Why don\'t you like being called "Mother of the Internet"?': {
+            text: 'Because I didn\'t invent the Internet. I invented a protocol that made large networks stable and self-healing. That\'s important, but it\'s not the same as inventing the whole thing. Titles like that oversimplify what happened and ignore all the other people who contributed. I\'d rather people understand what the Spanning Tree Protocol actually does than call me by some exaggerated title. Precision matters.',
+            citation: 'Radia Perlman on her title'
+          },
+          'What do you wish people understood about how the Internet works?': {
+            text: 'Most people think the Internet is magic. It\'s not. It\'s layers of protocols—rules for how computers talk to each other. Each layer solves a specific problem. My protocol solved the loop problem at the network bridge layer. Others solved routing, addressing, transmission. It all fits together. Understanding how it works makes you a better engineer and a more informed user. The Internet isn\'t magic. It\'s just very good engineering by a lot of people.',
+            citation: 'Radia Perlman on Internet literacy'
+          }
+        },
+        defaultResponse: 'Here\'s the thing about {question}: People love to make technology sound mysterious or magical. It\'s not. It\'s engineering—solving specific problems with specific solutions. I solved the network loop problem with an algorithm that organizes bridges into a tree. No magic. Just logic. Whatever you\'re working on, break it down into the actual problem you need to solve. Then solve it. Skip the hype.'
+      }
+    ];
+
+    function App() {
+      const [screen, setScreen] = useState('home');
+      const [selectedPioneer, setSelectedPioneer] = useState(null);
+      const [currentQuestion, setCurrentQuestion] = useState('');
+      const [currentResponse, setCurrentResponse] = useState(null);
+      const [questionHistory, setQuestionHistory] = useState([]);
+
+      const selectPioneer = (pioneer) => {
+        setSelectedPioneer(pioneer);
+        setScreen('meet');
+        setQuestionHistory([]);
+      };
+
+      const startAsking = () => {
+        setScreen('ask');
+      };
+
+      const askQuestion = (question) => {
+        const response = generateResponse(selectedPioneer, question);
+        setCurrentQuestion(question);
+        setCurrentResponse(response);
+        setQuestionHistory([...questionHistory, { question, response }]);
+        setScreen('response');
+      };
+
+      const generateResponse = (pioneer, question) => {
+        if (pioneer.responses[question]) {
+          return pioneer.responses[question];
+        }
+
+        const defaultText = pioneer.defaultResponse.replace('{question}', question);
+        return {
+          text: defaultText,
+          citation: `In the voice of ${pioneer.name}`
+        };
+      };
+
+      const goBackToAsk = () => {
+        setScreen('ask');
+      };
+
+      const goBackToMeet = () => {
+        setScreen('meet');
+      };
+
+      const goHome = () => {
+        setScreen('home');
+        setSelectedPioneer(null);
+        setCurrentQuestion('');
+        setCurrentResponse(null);
+        setQuestionHistory([]);
+      };
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
+          <header className="bg-slate-900/50 backdrop-blur-sm border-b border-yellow-600/20">
+            <div className="max-w-6xl mx-auto px-4 py-6">
+              <button
+                onClick={goHome}
+                className="text-yellow-600 hover:text-yellow-300 transition-colors text-2xl font-serif tracking-wide"
+              >
+                Hidden Histories Oracle
+              </button>
+            </div>
+          </header>
+
+          <main className="max-w-6xl mx-auto px-4 py-8 md:py-12">
+            {screen === 'home' && (
+              <div className="space-y-8">
+                <div className="text-center space-y-4 mb-12">
+                  <h1 className="text-4xl md:text-5xl font-serif text-white mb-4">
+                    Meet Computing's Erased Pioneers
+                  </h1>
+                  <p className="text-lg text-blue-200 max-w-3xl mx-auto leading-relaxed">
+                    These six people invented the field you're learning. They wrote the first code,
+                    built the first networks, calculated the paths to space. Most were forgotten.
+                    Now you can ask them anything.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {pioneers.map((pioneer) => (
+                    <button
+                      key={pioneer.id}
+                      onClick={() => selectPioneer(pioneer)}
+                      className="bg-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-lg p-6 text-left hover:border-yellow-600/50 hover:bg-slate-800/70 transition-all duration-300 transform hover:scale-105 group"
+                    >
+                      <div className="space-y-3">
+                        <div className="text-yellow-600 text-sm font-medium tracking-wide">
+                          {pioneer.era}
+                        </div>
+                        <h2 className="text-2xl font-serif text-white group-hover:text-yellow-600 transition-colors">
+                          {pioneer.name}
+                        </h2>
+                        {pioneer.subnames && (
+                          <p className="text-xs text-blue-300 italic">{pioneer.subnames}</p>
+                        )}
+                        <p className="text-blue-200 font-medium">
+                          {pioneer.title}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {screen === 'meet' && selectedPioneer && (
+              <div className="max-w-3xl mx-auto space-y-8">
+                <button
+                  onClick={goHome}
+                  className="text-blue-300 hover:text-yellow-600 transition-colors flex items-center gap-2"
+                >
+                  ← Back to all pioneers
+                </button>
+
+                <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-lg p-8 space-y-6">
+                  <div className="border-b border-blue-700/30 pb-6">
+                    <div className="text-yellow-600 text-sm font-medium tracking-wide mb-2">
+                      {selectedPioneer.era}
+                    </div>
+                    <h1 className="text-4xl font-serif text-white mb-2">
+                      {selectedPioneer.name}
+                    </h1>
+                    {selectedPioneer.subnames && (
+                      <p className="text-sm text-blue-300 italic mb-3">{selectedPioneer.subnames}</p>
+                    )}
+                    <p className="text-xl text-blue-200">
+                      {selectedPioneer.title}
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-slate-900/50 border-l-4 border-yellow-600 pl-6 py-4 italic text-blue-100 text-lg leading-relaxed">
+                      "{selectedPioneer.keyQuote}"
+                    </div>
+
+                    <div className="text-blue-100 leading-relaxed">
+                      {selectedPioneer.bio}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={startAsking}
+                    className="w-full bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg"
+                  >
+                    Ask them a question
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {screen === 'ask' && selectedPioneer && (
+              <div className="max-w-3xl mx-auto space-y-8">
+                <button
+                  onClick={goBackToMeet}
+                  className="text-blue-300 hover:text-yellow-600 transition-colors flex items-center gap-2"
+                >
+                  ← Back to {selectedPioneer.name}'s story
+                </button>
+
+                <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-lg p-8 space-y-6">
+                  <div>
+                    <h2 className="text-3xl font-serif text-white mb-2">
+                      What would you like to ask {selectedPioneer.name}?
+                    </h2>
+                    <p className="text-blue-200">
+                      Choose a suggested question or write your own.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <p className="text-yellow-600 font-medium">Suggested questions:</p>
+                    {selectedPioneer.suggestedQuestions.map((question, index) => (
+                      <button
+                        key={index}
+                        onClick={() => askQuestion(question)}
+                        className="w-full text-left bg-slate-900/50 hover:bg-slate-900/80 border border-blue-700/30 hover:border-yellow-600/50 rounded-lg p-4 text-blue-100 transition-all duration-200"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="pt-4 border-t border-blue-700/30 space-y-3">
+                    <label className="text-yellow-600 font-medium block">
+                      Or ask your own question:
+                    </label>
+                    <textarea
+                      value={currentQuestion}
+                      onChange={(e) => setCurrentQuestion(e.target.value)}
+                      placeholder="Type your question here..."
+                      className="w-full bg-slate-900/50 border border-blue-700/30 rounded-lg p-4 text-blue-100 placeholder-blue-400 focus:outline-none focus:border-yellow-600/50 min-h-[100px] resize-none"
+                    />
+                    <button
+                      onClick={() => {
+                        if (currentQuestion.trim()) {
+                          askQuestion(currentQuestion.trim());
+                          setCurrentQuestion('');
+                        }
+                      }}
+                      disabled={!currentQuestion.trim()}
+                      className="w-full bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Ask this question
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {screen === 'response' && selectedPioneer && currentResponse && (
+              <div className="max-w-3xl mx-auto space-y-8">
+                <button
+                  onClick={goBackToAsk}
+                  className="text-blue-300 hover:text-yellow-600 transition-colors flex items-center gap-2"
+                >
+                  ← Ask another question
+                </button>
+
+                <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-700/30 rounded-lg p-8 space-y-6">
+                  <div className="border-b border-blue-700/30 pb-4">
+                    <div className="text-yellow-600 text-sm font-medium mb-2">
+                      You asked {selectedPioneer.name}:
+                    </div>
+                    <p className="text-xl text-blue-100 italic">
+                      "{currentQuestion}"
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="text-blue-100 leading-relaxed text-lg">
+                      {currentResponse.text}
+                    </div>
+
+                    {currentResponse.citation && (
+                      <div className="text-sm text-blue-300 italic pt-4 border-t border-blue-700/20">
+                        {currentResponse.citation}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                    <button
+                      onClick={goBackToAsk}
+                      className="flex-1 bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                    >
+                      Ask another question
+                    </button>
+                    <button
+                      onClick={goHome}
+                      className="flex-1 bg-slate-700 hover:bg-slate-600 text-blue-100 font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                    >
+                      Meet another pioneer
+                    </button>
+                  </div>
+                </div>
+
+                {questionHistory.length > 1 && (
+                  <div className="bg-slate-800/30 backdrop-blur-sm border border-blue-700/20 rounded-lg p-6">
+                    <h3 className="text-yellow-600 font-medium mb-4">Your conversation history:</h3>
+                    <div className="space-y-3">
+                      {questionHistory.slice(0, -1).map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setCurrentQuestion(item.question);
+                            setCurrentResponse(item.response);
+                          }}
+                          className="w-full text-left text-sm text-blue-300 hover:text-yellow-600 transition-colors"
+                        >
+                          {index + 1}. {item.question}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </main>
+
+          <footer className="mt-16 py-8 bg-slate-900/50 backdrop-blur-sm border-t border-yellow-600/20">
+            <div className="max-w-6xl mx-auto px-4 text-center text-blue-300 text-sm">
+              <p className="mb-2">
+                Built to honor the pioneers who were erased from computing history.
+              </p>
+              <p className="text-xs text-blue-400">
+                For educational use. Learn more. Remember their names.
+              </p>
+            </div>
+          </footer>
+        </div>
+      );
+    }
+
+    // Render the app
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
